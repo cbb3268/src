@@ -52,6 +52,16 @@
     padding: 10px
 }
 
+.locations-bottomline {
+    border-style: solid;
+    display: block;
+    border-width: 1px;
+}
+
+.locations-bottom-row {
+    background-color: #009623;
+}
+
 body {
     color: #444;
     -webkit-font-smoothing: antialiased;
