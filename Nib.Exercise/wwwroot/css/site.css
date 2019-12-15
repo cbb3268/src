@@ -1,1 +1,7 @@
 ﻿
+.TopBanner {
+    width: 100%;
+    background-color: #009623;
+    text-align: center;
+    padding: 10px 0;
+}
