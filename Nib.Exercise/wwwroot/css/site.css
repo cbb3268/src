@@ -62,6 +62,75 @@
     background-color: #009623;
 }
 
+
+.vacancies {
+    background-color: #009623;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.vacancy-itemrow {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+
+
+.vacancy-row {
+    background-color: #009623;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+
+.vacancy-title {
+    font-size: large;
+    color: white;
+}
+
+.vacancy-location-right {
+    text-align: right;
+    font-size: medium;
+    color: white;
+}
+
+.vacancy-location-left {
+    text-align: left;
+    font-size: medium;
+    color: white;
+}
+
+.vacancy-description {
+    font-size: small;
+    color: white;
+}
+
+.vacancy-month {
+    color: white;
+    font-size: medium;
+    text-align: center
+}
+
+.vacancy-monthday {
+    color: white;
+    font-size: x-large;
+    text-align: center;
+    padding-top: 5px
+}
+
+span {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin: 1px;
+    background-color: darkgreen;
+}
+
+
+.vacancies-detail {
+    background-color: #009623;
+}
+
 body {
     color: #444;
     -webkit-font-smoothing: antialiased;
