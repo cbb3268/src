@@ -7,5 +7,6 @@ namespace Nib.Exercise.Configurations
 {
     public class ConfigurationExercise
     {
+        public string LocationsApiUrl { get; set; }
     }
 }

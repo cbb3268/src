@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nib.Exercise.Configurations;
 using Nib.Exercise.Helpers;
+using Nib.Exercise.Extensions;
 
 namespace Nib.Exercise
 {
@@ -36,6 +37,8 @@ namespace Nib.Exercise
             services.AddRazorPages(); 
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
             services.AddControllersWithViews();
+            
+            services.RegisterLocationsClient(_configurationExercise.LocationsApiUrl);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
