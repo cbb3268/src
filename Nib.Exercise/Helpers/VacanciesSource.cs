@@ -22,6 +22,8 @@ namespace Nib.Exercise.Helpers
 
         private VacancyListViewModel _vacancyListViewModel;
 
+        private IPropertiesFormatter<Vacancy> _propertiesFormatter;
+
         private object lockObject = new object();
 
         #endregion
@@ -29,10 +31,12 @@ namespace Nib.Exercise.Helpers
         #region CONSTRUCTORS
 
         public VacanciesSource(ILogger<VacanciesSource> logger
+            , IPropertiesFormatter<Vacancy> propertiesFormatter
             , IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
+            _propertiesFormatter = propertiesFormatter;
         }
 
         #endregion
@@ -94,7 +98,19 @@ namespace Nib.Exercise.Helpers
                 throw;
             }
 
+            ApplyFormatting(returnValue);
+
             return Task.FromResult(returnValue);
         }
+
+        private void ApplyFormatting(VacancyListViewModel vacancyListViewModel)
+        {
+            foreach (var vacancy in vacancyListViewModel.Vacancies)
+            {
+                _propertiesFormatter.Format(vacancy);
+            }
+        }
+
+
     }
 }

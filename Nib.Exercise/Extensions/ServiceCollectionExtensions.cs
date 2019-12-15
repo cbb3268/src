@@ -23,7 +23,6 @@ namespace Nib.Exercise.Extensions
         {
             var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetRequiredService<ILogger<LocationsSource>>();
-            logger.LogInformation("Seeded the database.");
 
             //Just incase we need to control serializer settings
             services.AddSingleton<JsonSerializerSettings>();

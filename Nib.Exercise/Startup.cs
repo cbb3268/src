@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Nib.Exercise.Configurations;
 using Nib.Exercise.Helpers;
 using Nib.Exercise.Extensions;
+using Nib.Exercise.Interfaces;
+using Nib.Exercise.Models;
 
 namespace Nib.Exercise
 {
@@ -34,10 +36,13 @@ namespace Nib.Exercise
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(_configurationExercise);
+
             services.AddRazorPages(); 
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
             services.AddControllersWithViews();
-            
+
+            services.AddSingleton<IPropertiesFormatter<Vacancy>, VacancyPropertiesFormatter>();
             services.RegisterLocationsClient(_configurationExercise.LocationsApiUrl);
             services.RegisterVacanciesSource();
         }
