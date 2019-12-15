@@ -5,3 +5,39 @@
     text-align: center;
     padding: 10px 0;
 }
+
+.careers-why-its-worth-it__text {
+    text-align: center;
+    word-wrap: break-word;
+    color: black;
+}
+
+.careers-why-its-worth-it__icon {
+    height: 64px;
+    width: 64px;
+    display: block;
+    margin: auto;
+}
+
+.careers-row {
+    background-color: white;
+    padding: 60px
+}
+
+.careers-column {
+    padding-bottom: 20px
+}
+
+body {
+    color: #444;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body, h1, h2, h3, h4, h5 {
+    font-family: Open Sans,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+}
