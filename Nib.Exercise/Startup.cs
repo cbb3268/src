@@ -39,6 +39,7 @@ namespace Nib.Exercise
             services.AddControllersWithViews();
             
             services.RegisterLocationsClient(_configurationExercise.LocationsApiUrl);
+            services.RegisterVacanciesSource();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

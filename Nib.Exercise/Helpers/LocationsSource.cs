@@ -36,7 +36,7 @@ namespace Nib.Exercise.Helpers
 
         #endregion
 
-        public async Task<List<Location>> GetLocations(CancellationToken cancellationToken = new CancellationToken())
+        public async Task<List<Location>> GetLocationListViewModel(CancellationToken cancellationToken = new CancellationToken())
         {
             List<Location> returnValue = null;
 

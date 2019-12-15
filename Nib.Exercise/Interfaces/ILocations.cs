@@ -9,6 +9,6 @@ namespace Nib.Exercise.Interfaces
     public interface ILocations
     {
 
-        Task<List<Location>> GetLocations(CancellationToken cancellationToken = new CancellationToken());
+        Task<List<Location>> GetLocationListViewModel(CancellationToken cancellationToken = new CancellationToken());
     }
 }

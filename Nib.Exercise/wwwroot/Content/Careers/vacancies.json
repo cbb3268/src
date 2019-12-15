@@ -1,0 +1,38 @@
+{
+	"Vacancies":[
+		{
+			"LocationId":1,
+			"Title":"Alliances Operations Coordinator",
+			"Description":"As exciting opportunity exists for a self motivated and solutions-focused professional to provide support in the management of an insurance portfolio",
+			"City":"SYDNEY",
+			"Month":"January",
+			"MonthDay":26,
+		},
+		{
+			"LocationId":2,
+			"Title":"Customer Service Manager",
+			"Description":"Tired of commiting to Sydney? nib have two great opportunities for experienced Customer Service Managers to join our Newcastle or Gosform teams!",
+			"City":"GOSFORD",
+			"Month":"February",
+			"MonthDay":1,
+		},
+    {
+      "LocationId": 2,
+      "Title": "Team Leader-Customer Care",
+      "Description": "Great opportunity for an experienced Team Leader to join our brand new contract centre in Gosford. This is your chance to really make an impact!",
+      "City": "GOSFORD",
+      "Month": "February",
+      "MonthDay": 7
+    },
+    {
+      "LocationId": 3,
+      "Title": "Retail centre consultant",
+      "Description": "Great opportunity for a customer service and sales superstar to play in a intrumental role in our business, by being the face of our retail centre",
+      "City": "NEWCASTLE",
+      "Month": "February",
+      "MonthDay": 14
+    }
+	]
+	
+
+}

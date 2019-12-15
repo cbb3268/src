@@ -18,7 +18,7 @@ namespace Nib.Excercise.UnitTests.IntegrationTests
         public void CanGetLocationResources()
         {
             var tester = ServiceProvider.GetRequiredService<ILocations>();
-            var restResult = tester.GetLocations().Result;
+            var restResult = tester.GetLocationListViewModel().Result;
             Assert.True(restResult.Count>0, "No locations returned");
         }
      

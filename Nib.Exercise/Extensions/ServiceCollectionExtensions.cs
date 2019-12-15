@@ -45,6 +45,14 @@ namespace Nib.Exercise.Extensions
                 }));
         }
 
+        /// <summary>
+        /// Register the IVancancies implementation dependencies
+        /// </summary>
+        /// <param name="services"></param>
+        public static void RegisterVacanciesSource(this IServiceCollection services)
+        {
+            services.AddSingleton<IVancancies, VacanciesSource>();
+        }
 
     }
 }

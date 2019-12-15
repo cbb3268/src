@@ -21,15 +21,19 @@ namespace Nib.Exercise.Controllers
 
         private readonly ILocations _locations;
 
+        private readonly IVancancies _vancancies;
+
         #endregion
 
         #region CONSTRUCTORS
 
         public CareersController(ILogger<CareersController> logger
-            , ILocations locations)
+            , ILocations locations
+            , IVancancies vancancies)
         {
             _logger = logger;
             _locations = locations;
+            _vancancies = vancancies;
         }
 
         #endregion
@@ -39,10 +43,16 @@ namespace Nib.Exercise.Controllers
         {
             try
             {
-                var task = CacheLocationList();
+                var repoTask = _vancancies.GetVacancyListViewModel(0);
+                repoTask.Wait();
+                var allVacancies = repoTask.Result;
+                var allLocationsWithVacancies = (from n in allVacancies.Vacancies
+                                                 select n.LocationId).Distinct().ToList();
+
+                var task = CacheLocationListViewModel(allLocationsWithVacancies);
                 task.Wait();
 
-                return View();
+                return View(allVacancies);
             }
             catch (Exception ex)
             {
@@ -63,10 +73,11 @@ namespace Nib.Exercise.Controllers
         /// Adds the location list data to the ViewData bag
         /// </summary>
         /// <returns>The locations</returns>
-        private async Task CacheLocationList()
+        private async Task CacheLocationListViewModel(List<int> locationIdFilterList)
         {
-            var locations = await _locations.GetLocations();
+            var locations = await _locations.GetLocationListViewModel();
             var locationList = (from n in locations
+                                where locationIdFilterList.Contains(n.Id)
                                 select new SelectListItem
                                 {
                                     Text = n.Name,
