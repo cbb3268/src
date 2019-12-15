@@ -26,4 +26,15 @@
                 <h1 class="careers-why-its-worth-it__text">Contemporary offices in a greate location</h1>
             </div>
         </div>
+
+
+        <div class="row locations-row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-label">
+                <h1 style="font-size:x-large">Our Vacancies</h1>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-dropdown">
+                @Html.DropDownList("LocationList", (IEnumerable
+               <SelectListItem>)TempData["LocationList"])
+            </div>
+        </div>
     </div>

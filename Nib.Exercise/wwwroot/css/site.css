@@ -28,6 +28,30 @@
     padding-bottom: 20px
 }
 
+
+.locations-row {
+    background-color: #009623;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.locations-label {
+    color: white;
+    align-content: center;
+    text-align: center;
+    display: block;
+    padding: 10px
+}
+
+.locations-dropdown {
+    font-size: x-large;
+    color: white;
+    align-content: center;
+    text-align: center;
+    display: block;
+    padding: 10px
+}
+
 body {
     color: #444;
     -webkit-font-smoothing: antialiased;
