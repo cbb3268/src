@@ -3,50 +3,122 @@
 }
 
 
-    <div class="container">
-        <div class="row">
-            <img src="~/Content/Careers/loveyourcareer.JPG" alt="love your career" class="img-fluid img-thumbnail" />
+@section Scripts
+{
+    <script type="text/javascript">
+        function Location_Changed() {
+            var dropdown = document.getElementById( "CtrlLocationList" );
+            var value = dropdown.options[dropdown.selectedIndex].value;
+
+             $.ajax({
+                type: "GET",
+                url: '@Url.Action("FilteredVacancies")',
+                 data: { 'locationId': value },
+                dataType: "json",
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                contentType: "application/json; charset=utf-8",
+                success: function (vacancyListViewModel) {
+                    var data = $.parseJSON(vacancyListViewModel);
+                    var html = '';
+                    $.each(data.Vacancies, function (index, vacancy) {
+                        html += '<div class="row vacancy-row">';
+                        html += '<div class="col">';
+                        html += '<div class="row d-none d-sm-block d-md-none d-block d-sm-none">';
+                        html += '<div class="col vacancy-title d-none d-sm-block d-md-none d-block d-sm-none">';
+                        html += vacancy.Title;
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="row vacancy-itemrow">';
+                        html += '<div class="col vacancy-title  d-none d-md-block">';
+                        html += vacancy.Title;
+                        html += '</div>';
+                        html += '<div class="col vacancy-location-right d-none d-md-block">';
+                        html += vacancy.City;
+                        html += '</div>';
+                        html += '<div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">';
+                        html += vacancy.City;
+                        html += '</div>';
+                        html += '<div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">';
+                        html += '<div class="container">';
+                        html += '<h1>'+ vacancy.Month + vacancy.MonthDay +'</h1>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="row vacancy-itemrow">';
+                        html += '<div class="col vacancy-description">';
+                        html += vacancy.ShortDescription;
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="d-none d-md-block">';
+                        html += '<div class="container">';
+                        html += '<span class="border border-dark">';
+                        html += '<h1 class="vacancy-monthday">' + vacancy.MonthDay + '</h1>';
+                        html += '<h1 class="vacancy-month">' + vacancy.Month + '</h1>';
+                        html += '</span>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    });
+
+                    $("#vacanciesDiv").html(html);
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+            return false;
+        };
+    </script>
+}
+
+
+<div class="container">
+    <div class="row">
+        <img src="~/Content/Careers/loveyourcareer.JPG" alt="love your career" class="img-fluid img-thumbnail" />
+    </div>
+
+    <div class="row careers-row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
+            <img src="~/Content/Careers/clockicon.png" class="img-responsive careers-why-its-worth-it__icon" />
+            <h1 class="careers-why-its-worth-it__text">Flexible work hours to suit your lifestyle</h1>
         </div>
-
-        <div class="row careers-row">
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
-                <img src="~/Content/Careers/clockicon.png" class="img-responsive careers-why-its-worth-it__icon" />
-                <h1 class="careers-why-its-worth-it__text">Flexible work hours to suit your lifestyle</h1>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
-                <img src="~/Content/Careers/bicycle.JPG" class="img-responsive careers-why-its-worth-it__icon" />
-                <h1 class="careers-why-its-worth-it__text">A new bike to get around town!</h1>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
-                <img src="~/Content/Careers/umbrella.JPG" class="img-responsive careers-why-its-worth-it__icon" />
-                <h1 class="careers-why-its-worth-it__text">Discounted health insurance</h1>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
-                <img src="~/Content/Careers/geo.JPG" class="img-responsive careers-why-its-worth-it__icon" />
-                <h1 class="careers-why-its-worth-it__text">Contemporary offices in a greate location</h1>
-            </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
+            <img src="~/Content/Careers/bicycle.JPG" class="img-responsive careers-why-its-worth-it__icon" />
+            <h1 class="careers-why-its-worth-it__text">A new bike to get around town!</h1>
         </div>
-
-
-        <div class="row locations-row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-label">
-                <h1 style="font-size:x-large">Our Vacancies</h1>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-dropdown">
-                @Html.DropDownList("LocationList", (IEnumerable
-               <SelectListItem>)TempData["LocationList"])
-            </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
+            <img src="~/Content/Careers/umbrella.JPG" class="img-responsive careers-why-its-worth-it__icon" />
+            <h1 class="careers-why-its-worth-it__text">Discounted health insurance</h1>
         </div>
-
-        <div class="row locations-bottom-row">
-            <div class="col">
-                <hr class="locations-bottomline" />
-            </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8 col-xs-8 careers-column">
+            <img src="~/Content/Careers/geo.JPG" class="img-responsive careers-why-its-worth-it__icon" />
+            <h1 class="careers-why-its-worth-it__text">Contemporary offices in a greate location</h1>
         </div>
+    </div>
 
-        <div id="vacanciesDiv">
-            @foreach (var vacancy in Model.Vacancies)
-            {
+
+    <div class="row locations-row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-label">
+            <h1 style="font-size:x-large">Our Vacancies</h1>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-1 col-xs-1 locations-dropdown">
+            @Html.DropDownList("LocationList", (IEnumerable
+           <SelectListItem>)TempData["LocationList"]
+           , "All Locations"
+           , new { @class = "form-control", @id = "CtrlLocationList", @onchange = "Location_Changed()" })
+        </div>
+    </div>
+
+    <div class="row locations-bottom-row">
+        <div class="col">
+            <hr class="locations-bottomline" />
+        </div>
+    </div>
+
+    <div id="vacanciesDiv">
+        @foreach (var vacancy in Model.Vacancies)
+        {
             <div class="row vacancy-row">
                 <div class="col">
                     <div class="row d-none d-sm-block d-md-none d-block d-sm-none">
@@ -54,38 +126,38 @@
                             @vacancy.Title
                         </div>
                     </div>
-                        <div class="row vacancy-itemrow">
-                            <div class="col vacancy-title d-none d-md-block">
-                                @vacancy.Title
-                            </div>
-                            <div class="col vacancy-location-right d-none d-md-block">
-                                @vacancy.City
-                            </div>
-
-                            <div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">
-                                @vacancy.City
-                            </div>
-                            <div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">
-                                <div class="container">
-                                    <h1>@vacancy.Month @vacancy.MonthDay</h1>
-                                </div>
-                            </div>
+                    <div class="row vacancy-itemrow">
+                        <div class="col vacancy-title d-none d-md-block">
+                            @vacancy.Title
                         </div>
-                        <div class="row vacancy-itemrow">
-                            <div class="col vacancy-description">
-                                @vacancy.ShortDescription
+                        <div class="col vacancy-location-right d-none d-md-block">
+                            @vacancy.City
+                        </div>
+
+                        <div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">
+                            @vacancy.City
+                        </div>
+                        <div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">
+                            <div class="container">
+                                <h1>@vacancy.Month @vacancy.MonthDay</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="d-none d-md-block">
-                        <div class="container">
-                            <span class="border border-dark">
-                                <h1 class="vacancy-monthday">@vacancy.MonthDay</h1>
-                                <h1 class="vacancy-month">@vacancy.Month</h1>
-                            </span>
+                    <div class="row vacancy-itemrow">
+                        <div class="col vacancy-description">
+                            @vacancy.ShortDescription
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+                <div class="d-none d-md-block">
+                    <div class="container">
+                        <span class="border border-dark">
+                            <h1 class="vacancy-monthday">@vacancy.MonthDay</h1>
+                            <h1 class="vacancy-month">@vacancy.Month</h1>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
+</div>

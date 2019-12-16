@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Nib.Exercise.Interfaces;
 using Nib.Exercise.Models;
 
@@ -59,6 +60,20 @@ namespace Nib.Exercise.Controllers
                 _logger.LogError(ex, $"Unknown exception trying to create Careers view ");
                 return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
+        }
+
+        /// <summary>
+        /// Returns all vacancies matching the locationid
+        /// </summary>
+        /// <param name="locationId">Filter Id</param>
+        /// <returns></returns>
+        public JsonResult FilteredVacancies(int locationId)
+        {
+            var repoTask = _vancancies.GetVacancyListViewModel(locationId);
+            repoTask.Wait();
+            var data = repoTask.Result;
+            var json = JsonConvert.SerializeObject(data);
+            return new JsonResult(json);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
