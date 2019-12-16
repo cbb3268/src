@@ -1,13 +1,13 @@
 {
 	"Vacancies":[
-		{
-			"LocationId":1,
-			"Title":"Alliances Operations Coordinator",
-			"Description":"As exciting opportunity exists for a self motivated and solutions-focused professional to provide support in the management of an insurance portfolio",
-			"City":"SYDNEY",
-			"Month":"January",
-			"MonthDay":26,
-		},
+    {
+      "LocationId": 1,
+      "Title": "Alliances Operations Coordinator",
+      "Description": "As exciting opportunity exists for a self motivated and solutions-focused professional to provide support in the management of an insurance portfolio",
+      "City": "NEWCASTLE",
+      "Month": "January",
+      "MonthDay": 26
+    },
 		{
 			"LocationId":2,
 			"Title":"Customer Service Manager",
@@ -28,7 +28,7 @@
       "LocationId": 3,
       "Title": "Retail centre consultant",
       "Description": "Great opportunity for a customer service and sales superstar to play in a intrumental role in our business, by being the face of our retail centre",
-      "City": "NEWCASTLE",
+      "City": "SYDNEY",
       "Month": "February",
       "MonthDay": 14
     }
