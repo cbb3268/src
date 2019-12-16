@@ -63,17 +63,16 @@ namespace Nib.Exercise.Controllers
         }
 
         /// <summary>
-        /// Returns all vacancies matching the locationid
+        /// Returns PartialView for filtered vacancies
         /// </summary>
         /// <param name="locationId">Filter Id</param>
         /// <returns></returns>
-        public JsonResult FilteredVacancies(int locationId)
+        public IActionResult ApplyFilter(int locationId)
         {
             var repoTask = _vancancies.GetVacancyListViewModel(locationId);
             repoTask.Wait();
             var data = repoTask.Result;
-            var json = JsonConvert.SerializeObject(data);
-            return new JsonResult(json);
+            return PartialView("_Careers", data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

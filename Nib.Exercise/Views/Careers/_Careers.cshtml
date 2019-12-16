@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="vacanciesDiv">
+    @foreach (var vacancy in Model.Vacancies)
+    {
+        <div class="row vacancy-row" onclick="location.href = '@(Url.Action("Vacancy","Vacancy",new { vacancyDescription = @vacancy.Description }))'">
+            <div class="col">
+                <div class="row d-none d-sm-block d-md-none d-block d-sm-none">
+                    <div class="col vacancy-title d-none d-sm-block d-md-none d-block d-sm-none">
+                        @vacancy.Title
+                    </div>
+                </div>
+                <div class="row vacancy-itemrow">
+                    <div class="col vacancy-title d-none d-md-block">
+                        @vacancy.Title
+                    </div>
+                    <div class="col vacancy-location-right d-none d-md-block">
+                        @vacancy.City
+                    </div>
+
+                    <div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">
+                        @vacancy.City
+                    </div>
+                    <div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">
+                        <div class="container">
+                            <h1>@vacancy.Month @vacancy.MonthDay</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row vacancy-itemrow">
+                    <div class="col vacancy-description">
+                        @vacancy.ShortDescription
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-block">
+                <div class="container">
+                    <span class="border border-dark">
+                        <h1 class="vacancy-monthday">@vacancy.MonthDay</h1>
+                        <h1 class="vacancy-month">@vacancy.Month</h1>
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -10,63 +10,11 @@
             var dropdown = document.getElementById( "CtrlLocationList" );
             var value = dropdown.options[dropdown.selectedIndex].value;
 
-             $.ajax({
-                type: "GET",
-                url: '@Url.Action("FilteredVacancies")',
-                 data: { 'locationId': value },
-                dataType: "json",
-                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                contentType: "application/json; charset=utf-8",
-                success: function (vacancyListViewModel) {
-                    var data = $.parseJSON(vacancyListViewModel);
-                    var html = '';
-                    $.each(data.Vacancies, function (index, vacancy) {
-                        html += '<div class="row vacancy-row">';
-                        html += '<div class="col">';
-                        html += '<div class="row d-none d-sm-block d-md-none d-block d-sm-none">';
-                        html += '<div class="col vacancy-title d-none d-sm-block d-md-none d-block d-sm-none">';
-                        html += vacancy.Title;
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div class="row vacancy-itemrow">';
-                        html += '<div class="col vacancy-title  d-none d-md-block">';
-                        html += vacancy.Title;
-                        html += '</div>';
-                        html += '<div class="col vacancy-location-right d-none d-md-block">';
-                        html += vacancy.City;
-                        html += '</div>';
-                        html += '<div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">';
-                        html += vacancy.City;
-                        html += '</div>';
-                        html += '<div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">';
-                        html += '<div class="container">';
-                        html += '<h1>'+ vacancy.Month + vacancy.MonthDay +'</h1>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div class="row vacancy-itemrow">';
-                        html += '<div class="col vacancy-description">';
-                        html += vacancy.ShortDescription;
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div class="d-none d-md-block">';
-                        html += '<div class="container">';
-                        html += '<span class="border border-dark">';
-                        html += '<h1 class="vacancy-monthday">' + vacancy.MonthDay + '</h1>';
-                        html += '<h1 class="vacancy-month">' + vacancy.Month + '</h1>';
-                        html += '</span>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                    });
-
-                    $("#vacanciesDiv").html(html);
-                },
-                error: function () {
-                    alert("Error while inserting data");
-                }
-            });
+            //hack the action to get the Id in there
+            var link = '@Url.Action("ApplyFilter", "Careers", new { locationId = "-1" })';
+            link = link.replace("-1", value);
+            //Refresh the div via AJAX
+            $("#vacanciesDiv").load(link);
             return false;
         };
     </script>
@@ -117,47 +65,6 @@
     </div>
 
     <div id="vacanciesDiv">
-        @foreach (var vacancy in Model.Vacancies)
-        {
-            <div class="row vacancy-row">
-                <div class="col">
-                    <div class="row d-none d-sm-block d-md-none d-block d-sm-none">
-                        <div class="col vacancy-title d-none d-sm-block d-md-none d-block d-sm-none">
-                            @vacancy.Title
-                        </div>
-                    </div>
-                    <div class="row vacancy-itemrow">
-                        <div class="col vacancy-title d-none d-md-block">
-                            @vacancy.Title
-                        </div>
-                        <div class="col vacancy-location-right d-none d-md-block">
-                            @vacancy.City
-                        </div>
-
-                        <div class="col vacancy-location-left d-none d-sm-block d-md-none d-block d-sm-none">
-                            @vacancy.City
-                        </div>
-                        <div class="col vacancy-location-right d-none d-sm-block d-md-none d-block d-sm-none">
-                            <div class="container">
-                                <h1>@vacancy.Month @vacancy.MonthDay</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row vacancy-itemrow">
-                        <div class="col vacancy-description">
-                            @vacancy.ShortDescription
-                        </div>
-                    </div>
-                </div>
-                <div class="d-none d-md-block">
-                    <div class="container">
-                        <span class="border border-dark">
-                            <h1 class="vacancy-monthday">@vacancy.MonthDay</h1>
-                            <h1 class="vacancy-month">@vacancy.Month</h1>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        }
+        @await Html.PartialAsync("~/Views/Careers/_Careers.cshtml")
     </div>
 </div>
