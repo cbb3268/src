@@ -44,16 +44,32 @@ namespace Nib.Exercise.Controllers
         {
             try
             {
-                var repoTask = _vancancies.GetVacancyListViewModel(0);
+                //Get all vancancies to filter the locations
+                var repoTask = _vancancies.GetVacancyListViewModel();
                 repoTask.Wait();
                 var allVacancies = repoTask.Result;
                 var allLocationsWithVacancies = (from n in allVacancies.Vacancies
                                                  select n.LocationId).Distinct().ToList();
-
                 var task = CacheLocationListViewModel(allLocationsWithVacancies);
                 task.Wait();
 
-                return View(allVacancies);
+
+                //Now filter locations based on prevous selections or not
+                var filteredVacancies = allVacancies;
+                if (HttpContext.Session.GetInt32("LocationId").HasValue)
+                {
+                    //filter based on prevous selection, user must be coming back from another page    
+                    var matchingVacancies = (from n in allVacancies.Vacancies
+                                             where n.LocationId== HttpContext.Session.GetInt32("LocationId").Value
+                                             select n).ToList();
+
+                    //Must copy as result is persisted in singleton so has to hold all vacancies
+                    filteredVacancies = new VacancyListViewModel();
+                    filteredVacancies.Vacancies = matchingVacancies;
+                }
+
+
+                return View(filteredVacancies);
             }
             catch (Exception ex)
             {
@@ -69,6 +85,7 @@ namespace Nib.Exercise.Controllers
         /// <returns></returns>
         public IActionResult ApplyFilter(int locationId)
         {
+            HttpContext.Session.SetInt32("LocationId", locationId);
             var repoTask = _vancancies.GetVacancyListViewModel(locationId);
             repoTask.Wait();
             var data = repoTask.Result;

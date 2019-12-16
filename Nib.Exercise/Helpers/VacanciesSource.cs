@@ -41,7 +41,7 @@ namespace Nib.Exercise.Helpers
 
         #endregion
 
-        public Task<VacancyListViewModel> GetVacancyListViewModel(int locationId)
+        public Task<VacancyListViewModel> GetVacancyListViewModel(int locationId=0)
         {
             VacancyListViewModel returnValue;
             string fileName = $@"{_webHostEnvironment.WebRootPath}\Content\Careers\vacancies.json";

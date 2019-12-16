@@ -8,6 +8,6 @@ namespace Nib.Exercise.Interfaces
 {
     public interface IVancancies
     {
-        Task<VacancyListViewModel> GetVacancyListViewModel(int locationId);
+        Task<VacancyListViewModel> GetVacancyListViewModel(int locationId=0);
     }
 }

@@ -37,7 +37,7 @@ namespace Nib.Exercise
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(_configurationExercise);
-
+            services.AddSession();
             services.AddRazorPages(); 
             services.AddAntiforgery(o => o.HeaderName = "CSRF-TOKEN");
             services.AddControllersWithViews();
@@ -59,7 +59,7 @@ namespace Nib.Exercise
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
